@@ -34,5 +34,22 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@chakra-ui/react": "^2.3.5",
+    "@emotion/react": "^11.10.4",
+    "@emotion/styled": "^11.10.4",
+    "@fontsource/amaranth": "^4.5.9",
+    "@fontsource/lobster": "^4.5.11",
+    "@fontsource/montserrat": "^4.5.13",
+    "eslint": "^8.25.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-n": "^15.3.0",
+    "eslint-plugin-promise": "^6.1.0",
+    "eslint-plugin-react": "^7.31.10",
+    "framer-motion": "^7.5.3",
+    "prop-types": "^15.8.1",
+    "react-router-dom": "^6.4.2"
   }
 }
