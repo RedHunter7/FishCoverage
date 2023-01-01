@@ -14,6 +14,9 @@ const ListDataGridItem = (props) => {
   }
 
   const listText = props.listText
+  if (props.isLoaded && listText.length === 0) {
+    listText.push('Not Avaiable')
+  }
 
   // const spinnerDisplay = (props.isLoaded) ? 'none' : 'flex'
 

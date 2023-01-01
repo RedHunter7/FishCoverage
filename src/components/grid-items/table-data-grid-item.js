@@ -2,9 +2,11 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {
   GridItem, VStack, Heading,
-  Box, UnorderedList
+  Box, UnorderedList, Spinner,
+  Center
 } from '@chakra-ui/react'
 import NutritionListItem from '../nutrition-list-item'
+import { FadeAnimation } from '../animations'
 
 const TableDataGridItem = (props) => {
   return <GridItem colSpan={props.width} order={props.order}
@@ -16,15 +18,23 @@ const TableDataGridItem = (props) => {
             </Heading>
             <Box height={['350px', '350px', '350px', '310px']}
             width="100%" overflowY='auto'>
-                <UnorderedList width='90%'>
-                  {
-                        props.data.map(item => {
-                          return <NutritionListItem key={item.name}
+                <Center width='100%' position={'relative'} top={'35%'}>
+                  <FadeAnimation in={!props.isLoaded} unmountOnExit={true}>
+                    <Spinner thickness='6px' mb={['20px']}/>
+                  </FadeAnimation>
+                </Center>
+                <FadeAnimation in={props.isLoaded} delay={0.7}>
+                  <UnorderedList width='90%'>
+                    {
+                      props.data.map(item => {
+                        return <NutritionListItem
+                          key={item.name}
                           substanceName={item.name}
                           nutritionValue={item.value}/>
-                        })
-                  }
-                </UnorderedList>
+                      })
+                    }
+                  </UnorderedList>
+                </FadeAnimation>
             </Box>
         </VStack>
     </GridItem>
@@ -43,7 +53,8 @@ TableDataGridItem.propTypes = {
     value: PropTypes.oneOfType([
       PropTypes.number, PropTypes.string
     ]).isRequired
-  })).isRequired
+  })).isRequired,
+  isLoaded: PropTypes.bool.isRequired
 }
 
 export { TableDataGridItem }

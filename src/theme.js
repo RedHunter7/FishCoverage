@@ -57,12 +57,6 @@ const theme = extendTheme({
         color: colors.palseSpringBud
       },
 
-      img: {
-        borderRadius: '20px',
-        border: '6px solid',
-        borderColor: colors.mountainMeadow
-      },
-
       button: {
         transitionProperty: 'background-color,border-color,color,fill,stroke,opacity,box-shadow,transform,height,width'
       },

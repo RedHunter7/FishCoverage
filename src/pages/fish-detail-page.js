@@ -149,7 +149,7 @@ const FishDetailPage = () => {
         <>
            <Navbar title={speciesName} showBackBtn={true}/>
            <Suspense fallback={<div>Loading</div>}>
-            <Grid width='100%' gap={4}
+            <Grid width={['90%', '90%', '90%', '100%']} gap={4}
                 templateRows={[
                   'repeat(5, auto)',
                   'repeat(5, auto)',
@@ -160,6 +160,7 @@ const FishDetailPage = () => {
                 <OverviewDataGridItem fishName={fish['Species Name']}
                 fishLatinName={fish['Scientific Name']}
                 fishImage={fish['Species Illustration Photo']}
+                isLoaded={isLoaded}
                 width={[12, 12, 5, 4]} order={1}/>
 
                 <ListDataGridItem title='Biology'
@@ -180,7 +181,8 @@ const FishDetailPage = () => {
                 isLoaded={isLoaded}
                 width={[12, 12, 12, 5]} order={4}/>
 
-                <TableDataGridItem title='Nutrition' data={nutrition}
+                <TableDataGridItem title='Nutrition'
+                data={nutrition} isLoaded={isLoaded}
                 width={[12, 12, 6, 4]} order={[6, 6, 5, 5]}/>
                 <ListDataGridItem title='Physical'
                 listText={fish['Physical Description'] || undefined}

@@ -8,7 +8,9 @@ import { FadeAnimation } from '../animations'
 
 const ParagraphDataGridItem = (props) => {
   const spinnerDisplay = (props.text === (null || '')) ? 'flex' : 'none'
-  console.log(spinnerDisplay)
+
+  let text = props.text
+  if (props.isLoaded && text == null) text = 'Not Avaiable'
   return <GridItem colSpan={props.width} order={props.order}
   layerStyle='sectionCard' height='fit-content' className='fish-grid-item'>
         <VStack align='start' spacing='2' marginTop='10px'
@@ -27,7 +29,7 @@ const ParagraphDataGridItem = (props) => {
               <Box maxHeight={['fit-content', 'fit-content', 'fit-content', '270px']}
               overflowY='auto'>
                   <Text textAlign='justify'>
-                      {props.text}
+                      {text}
                   </Text>
               </Box>
             </FadeAnimation>
