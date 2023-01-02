@@ -56,6 +56,7 @@ const FishCard = (props) => {
         align='center'>
           <Center className='fish-card-frame'>
             <Image src={props.imageSrc || undefined}
+            fallbackSrc={fishDefaultImg}
             className='fish-card-img'/>
           </Center>
           <Link as={RouterLink} to={'/' + linkName}

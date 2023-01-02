@@ -1,54 +1,74 @@
 import React, { Suspense, useState, useEffect } from 'react'
-import { Wrap, WrapItem, Spinner } from '@chakra-ui/react'
+import { WrapItem, Spinner, Wrap, Center } from '@chakra-ui/react'
 import SearchForm from '../components/search-form'
 import FishCard from '../components/cards/fish-card'
-import { colors } from '../theme'
 import Navbar from '../components/navbar'
-import { FadeAnimation } from '../components/animations'
+import { colors } from '../theme'
+import InfiniteScroll from '../components/infinte-scroll'
+import axios from 'axios'
+// import { FadeAnimation } from '../components/animations'
 
 const HomePage = () => {
   const [fishes, fetchFishes] = useState([])
+  const [data, fetchData] = useState([])
+  const [page, setPage] = useState(1)
   const [spinnerDisplay, setSpinnerDisplay] = useState('initial')
-  const [isLoaded, setIsLoaded] = React.useState(false)
+  // const [isLoaded, setIsLoaded] = React.useState(false)
 
   useEffect(() => {
-    fetch('https://www.fishwatch.gov/api/species')
-      .then((response) => response.json())
-      .then((data) => {
-        fetchFishes(data)
-        console.log(data)
+    axios.get('https://www.fishwatch.gov/api/species')
+      .then((response) => {
+        fetchFishes(response.data)
+        fetchData(response.data.slice(0, 20))
         setSpinnerDisplay('none')
-        setIsLoaded(true)
+      // setIsLoaded(true)
       })
-  }, fishes)
+  }, [])
+
+  const displayMoreData = () => {
+    setTimeout(() => {
+      setPage(page + 1)
+      const startIndex = page * 10
+      const endIndex = startIndex + 20
+      fetchData(data.concat(fishes.slice(startIndex, endIndex)))
+    }, 1500)
+  }
+
+  const spinner = (
+    <Center marginTop='50px'>
+        <Spinner thickness='6px'/>
+    </Center>
+  )
 
   return (
-       <>
+      <>
         <Navbar/>
         <Suspense fallback={<div>Loading</div>}>
-          <SearchForm/>
-          <FadeAnimation in={isLoaded} delay={0.2}>
-            <Wrap width={'100%'} borderBottomRadius='15px'
-            borderBottom='solid' borderBottomColor={colors.mountainMeadow}
-            borderBottomWidth={['4px', '4px', 0, 0]}
-            spacing={[0, 0, '30px', '30px']}
-            mt={['30px', '60px']} justify='center'>
-              {
-                fishes.map((item, index) => {
-                  const imgUrl = item['Species Illustration Photo'].src
+            <SearchForm/>
+            <InfiniteScroll next={displayMoreData} loader={spinner}>
+              <Wrap width={'100%'}
+                borderBottomRadius='15px'
+                borderBottom='solid'
+                borderBottomColor={colors.mountainMeadow}
+                borderBottomWidth={['4px', '4px', 0, 0]}
+                spacing={[0, 0, '30px', '30px']}
+                mt={['30px', '60px']} justify='center'>
+                {
+                  data.map((item, index) => {
+                    const imgUrl = item['Species Illustration Photo'].src
 
-                  return <WrapItem key={index}>
-                      <FishCard title={item['Species Name']}
-                      imageSrc={imgUrl} />
-                    </WrapItem>
-                })
-              }
-            </Wrap>
-          </FadeAnimation>
-          <Spinner display={spinnerDisplay} thickness='6px'
-          mt={['30px', '60px']}/>
+                    return <WrapItem key={index}>
+                        <FishCard title={item['Species Name']}
+                            imageSrc={imgUrl} />
+                      </WrapItem>
+                  })
+                }
+              </Wrap>
+            </InfiniteScroll>
+            <Spinner display={spinnerDisplay} thickness='6px'
+            mt={['30px', '60px']}/>
         </Suspense>
-       </>
+      </>
   )
 }
 
