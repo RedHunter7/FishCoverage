@@ -11,28 +11,30 @@ import axios from 'axios'
 const HomePage = () => {
   const [fishes, fetchFishes] = useState([])
   const [data, fetchData] = useState([])
-  const [page, setPage] = useState(1)
-  const [spinnerDisplay, setSpinnerDisplay] = useState('initial')
+  const [page, setPage] = useState(null)
+  const [hasMoreData, setDataStatus] = useState(true)
   // const [isLoaded, setIsLoaded] = React.useState(false)
 
   useEffect(() => {
     axios.get('https://www.fishwatch.gov/api/species')
       .then((response) => {
         fetchFishes(response.data)
-        fetchData(response.data.slice(0, 20))
-        setSpinnerDisplay('none')
-      // setIsLoaded(true)
+        setPage(0)
+        // setIsLoaded(true)
       })
   }, [])
 
   const displayMoreData = () => {
-    setTimeout(() => {
-      setPage(page + 1)
-      const startIndex = page * 10
-      const endIndex = startIndex + 20
-      fetchData(data.concat(fishes.slice(startIndex, endIndex)))
-    }, 1500)
+    const startIndex = page * 20
+    const endIndex = startIndex + 20
+    fetchData(data.concat(fishes.slice(startIndex, endIndex)))
+    console.log(data.length)
+    if (endIndex >= fishes.length && fishes.length > 0) {
+      setDataStatus(false)
+    }
   }
+
+  useEffect(displayMoreData, [page])
 
   const spinner = (
     <Center marginTop='50px'>
@@ -45,7 +47,11 @@ const HomePage = () => {
         <Navbar/>
         <Suspense fallback={<div>Loading</div>}>
             <SearchForm/>
-            <InfiniteScroll next={displayMoreData} loader={spinner}>
+            <InfiniteScroll
+            enable={data.length > 0}
+            hasMore={hasMoreData}
+            next={() => setPage(page + 1)}
+            loader={spinner}>
               <Wrap width={'100%'}
                 borderBottomRadius='15px'
                 borderBottom='solid'
@@ -65,8 +71,6 @@ const HomePage = () => {
                 }
               </Wrap>
             </InfiniteScroll>
-            <Spinner display={spinnerDisplay} thickness='6px'
-            mt={['30px', '60px']}/>
         </Suspense>
       </>
   )

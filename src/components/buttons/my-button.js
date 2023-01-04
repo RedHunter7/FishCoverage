@@ -11,7 +11,9 @@ const myButtonStyle = {
 }
 
 const MyButton = (props) => {
-  return <Button sx={myButtonStyle}
+  return <Button
+            onClick={props.onClick}
+            sx={myButtonStyle}
             size='md' bg={props.bg} _hover={{
               bg: colors.palseSpringBud,
               color: props.bg
@@ -22,7 +24,8 @@ const MyButton = (props) => {
 
 MyButton.propTypes = {
   bg: PropTypes.string.isRequired,
-  children: PropTypes.node.isRequired
+  children: PropTypes.node.isRequired,
+  onClick: PropTypes.func
 }
 
 export { MyButton }
