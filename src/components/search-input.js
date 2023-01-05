@@ -20,6 +20,8 @@ const SearchInput = (props) => {
     sx={searchInputStyle}
     placeholder='Search Fish Name'
     onChange={props.onChange}
+    value={props.value}
+    ref={props.ref}
     _focus={{
       border: '3px solid',
       borderColor: colors.blueSapphire
@@ -27,7 +29,9 @@ const SearchInput = (props) => {
 }
 
 SearchInput.propTypes = {
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
+  ref: PropTypes.object,
+  value: PropTypes.string
 }
 
 export default SearchInput

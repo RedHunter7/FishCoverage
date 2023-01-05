@@ -17,7 +17,11 @@ const SearchForm = (props) => {
             fontSize={['24px', '28px']}>
             <SearchIcon />
             </InputLeftElement>
-            <SearchInput onChange={props.onChange} />
+            <SearchInput
+            ref={props.inputRef}
+            onChange={props.onChange}
+            value={props.value}
+            />
         </InputGroup>
         <HStack spacing='24px'>
             <MyButton bg={colors.indigoDye}
@@ -32,6 +36,8 @@ const SearchForm = (props) => {
 }
 
 SearchForm.propTypes = {
+  inputRef: PropTypes.object,
+  value: PropTypes.string,
   onSubmit: PropTypes.func,
   onChange: PropTypes.func,
   onReset: PropTypes.func
