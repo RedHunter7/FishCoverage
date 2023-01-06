@@ -11,7 +11,7 @@ const ScrollToTop = (props) => {
   return props.children
 }
 
-export default ScrollToTop
+export { ScrollToTop }
 
 ScrollToTop.propTypes = {
   children: PropTypes.node.isRequired

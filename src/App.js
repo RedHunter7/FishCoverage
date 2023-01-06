@@ -1,9 +1,9 @@
 import { ChakraProvider, Container } from '@chakra-ui/react'
 import React from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { ScrollToTop } from './components/utility'
 import FishDetailPage from './pages/fish-detail-page'
 import HomePage from './pages/home-page'
-import ScrollToTop from './components/utility/scrollToTop'
 import { theme } from './theme'
 
 const App = () => {

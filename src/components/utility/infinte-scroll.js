@@ -1,22 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
-
-const useScroll = () => {
-  const [scroll, setScroll] = useState(0)
-  useEffect(() => {
-    const onScroll = () => {
-      setScroll(window.scrollY)
-    }
-    window.addEventListener('scroll', onScroll)
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
-  return scroll
-}
+import { useScroll } from '../../custom-hooks/use-scroll'
 
 const InfiniteScroll = (props) => {
   const [reachedBottom, setReachedBottom] = useState(false)
   const scroll = useScroll()
-  console.log(reachedBottom)
 
   useEffect(() => {
     const isBottom = scroll + window.innerHeight >= document.body.scrollHeight
@@ -27,7 +15,6 @@ const InfiniteScroll = (props) => {
     if (reachedBottom && props.enable) {
       setReachedBottom(false)
       props.next()
-      console.log('bottom page')
     }
   }, [reachedBottom])
 
@@ -47,4 +34,4 @@ InfiniteScroll.propTypes = {
   next: PropTypes.func
 }
 
-export default InfiniteScroll
+export { InfiniteScroll }

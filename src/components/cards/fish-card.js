@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useRef, useState } from 'react'
 import PropTypes from 'prop-types'
 import { Link as RouterLink } from 'react-router-dom'
-import { Box, Center, Link, Stack, Image } from '@chakra-ui/react'
+import { Box, Center, Link, Stack, Image, ScaleFade } from '@chakra-ui/react'
 import { colors, fontFamily } from '../../theme'
 import fishDefaultImg from '../../images/fish-default.png'
+import { useIntersectionObserver } from '../../custom-hooks'
 
 const fishCardStyle = {
   width: ['105vw', '105vw', '240px', '240px'],
@@ -45,26 +46,35 @@ const fishCardStyle = {
 }
 
 const FishCard = (props) => {
+  const [isOpen, setOpen] = useState('false')
+  const ref = useRef()
+
+  useIntersectionObserver(ref, isIntersecting => {
+    setOpen(isIntersecting)
+  })
+
   let linkName = props.title
   linkName = linkName.toLowerCase()
   linkName = linkName.replaceAll(/ /g, '-')
 
-  return <Box sx={fishCardStyle}>
-        <Stack className='fish-card-stack'
-        direction={['row', 'row', 'column', 'column']}
-        spacing={['15px', '15px', 0, 0]}
-        align='center'>
-          <Center className='fish-card-frame'>
-            <Image src={props.imageSrc || undefined}
-            fallbackSrc={fishDefaultImg}
-            className='fish-card-img'/>
-          </Center>
-          <Link as={RouterLink} to={'/' + linkName}
-              className='fish-card-link'>
-                  {props.title}
-          </Link>
-      </Stack>
-  </Box>
+  return <ScaleFade in={isOpen} ref={ref}>
+      <Box sx={fishCardStyle}>
+          <Stack className='fish-card-stack'
+          direction={['row', 'row', 'column', 'column']}
+          spacing={['15px', '15px', 0, 0]}
+          align='center'>
+            <Center className='fish-card-frame'>
+              <Image src={props.imageSrc || undefined}
+              fallbackSrc={fishDefaultImg}
+              className='fish-card-img'/>
+            </Center>
+            <Link as={RouterLink} to={'/' + linkName}
+                className='fish-card-link'>
+                    {props.title}
+            </Link>
+        </Stack>
+    </Box>
+  </ScaleFade>
 }
 
 FishCard.defaultProps = {

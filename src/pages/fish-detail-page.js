@@ -90,6 +90,7 @@ const FishDetailPage = () => {
   const [isLoaded, setIsLoaded] = React.useState(false)
 
   useEffect(() => {
+    document.title = speciesName
     fetch(`https://www.fishwatch.gov/api/species/${speciesName}`)
       .then((response) => response.json())
       .then((data) => {
