@@ -5,8 +5,8 @@ import {
   Box, UnorderedList, Spinner,
   Center
 } from '@chakra-ui/react'
-import NutritionListItem from '../nutrition-list-item'
 import { FadeAnimation } from '../animations'
+import NutritionListItem from '../list-items/nutrition-list-item'
 
 const TableDataGridItem = (props) => {
   return <GridItem colSpan={props.width} order={props.order}

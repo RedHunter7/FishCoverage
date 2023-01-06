@@ -1,11 +1,10 @@
 import React, { Suspense, useState, useEffect } from 'react'
-import { WrapItem, Spinner, Wrap, Center } from '@chakra-ui/react'
-import SearchForm from '../components/search-form'
+import { WrapItem, Spinner, Center } from '@chakra-ui/react'
 import FishCard from '../components/cards/fish-card'
-import Navbar from '../components/navbar'
-import { colors } from '../theme'
-import InfiniteScroll from '../components/infinte-scroll'
+import InfiniteScroll from '../components/utility/infinte-scroll'
 import axios from 'axios'
+import { SearchForm } from '../components/forms'
+import { Navbar, ListView } from '../components/layouts'
 // import { FadeAnimation } from '../components/animations'
 
 const HomePage = () => {
@@ -67,6 +66,7 @@ const HomePage = () => {
   }, [displayData])
 
   const handleReset = () => {
+    setSearchValue('')
     fetchSearchResult(fishes)
   }
 
@@ -91,14 +91,8 @@ const HomePage = () => {
             hasMore={hasMoreData}
             next={() => setPage(page + 1)}
             loader={spinner}>
-              <Wrap width={'100%'}
-                borderBottomRadius='15px'
-                borderBottom='solid'
-                borderBottomColor={colors.mountainMeadow}
-                borderBottomWidth={['4px', '4px', 0, 0]}
-                spacing={[0, 0, '30px', '30px']}
-                mt={['30px', '60px']} justify='center'>
-                {
+              <ListView>
+              {
                   displayData.map((item, index) => {
                     const imgUrl = item['Species Illustration Photo'].src
 
@@ -108,7 +102,7 @@ const HomePage = () => {
                       </WrapItem>
                   })
                 }
-              </Wrap>
+              </ListView>
             </InfiniteScroll>
         </Suspense>
       </>

@@ -5,7 +5,7 @@ import {
   TableDataGridItem, OverviewDataGridItem
 } from '../components/grid-items'
 import { useParams } from 'react-router-dom'
-import Navbar from '../components/navbar'
+import { Navbar } from '../components/layouts'
 
 const htmlToArray = (html) => {
   if (html) {

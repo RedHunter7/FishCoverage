@@ -3,7 +3,7 @@ import React from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import FishDetailPage from './pages/fish-detail-page'
 import HomePage from './pages/home-page'
-import ScrollToTop from './scrollToTop'
+import ScrollToTop from './components/utility/scrollToTop'
 import { theme } from './theme'
 
 const App = () => {

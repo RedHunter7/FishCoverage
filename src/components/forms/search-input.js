@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Input } from '@chakra-ui/react'
-import { colors, fontFamily } from '../theme'
+import { colors, fontFamily } from '../../theme'
 
 const searchInputStyle = {
   height: ['42px', '50px'],
@@ -34,4 +34,4 @@ SearchInput.propTypes = {
   value: PropTypes.string
 }
 
-export default SearchInput
+export { SearchInput }

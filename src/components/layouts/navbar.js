@@ -2,9 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Link as RouterLink, useLocation } from 'react-router-dom'
 import { Box, Link, Flex, Spacer, HStack } from '@chakra-ui/react'
-import { colors, fontFamily } from '../theme'
-import { ListStarIcon, ArrowLeftIcon } from './icons'
-import { MyIconButton } from './buttons'
+import { colors, fontFamily } from '../../theme'
+import { ListStarIcon, ArrowLeftIcon } from '../icons'
+import { MyIconButton } from '../buttons'
 
 const navbarStyle = {
   position: 'fixed',
@@ -65,4 +65,4 @@ Navbar.propTypes = {
   showBackBtn: PropTypes.bool
 }
 
-export default Navbar
+export { Navbar }

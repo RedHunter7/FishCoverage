@@ -4,10 +4,10 @@ import {
   VStack, InputGroup,
   InputLeftElement, HStack
 } from '@chakra-ui/react'
-import { SearchIcon } from './icons/search-icon'
-import { colors } from '../theme'
-import { MyButton } from './buttons'
-import SearchInput from './search-input'
+import { SearchIcon } from '../icons/search-icon'
+import { colors } from '../../theme'
+import { MyButton } from '../buttons'
+import { SearchInput } from './search-input'
 
 const SearchForm = (props) => {
   return <VStack spacing={4} justify='center' width='80%'>
@@ -43,4 +43,4 @@ SearchForm.propTypes = {
   onReset: PropTypes.func
 }
 
-export default SearchForm
+export { SearchForm }
