@@ -21,7 +21,7 @@ const OverviewDataGridItem = (props) => {
           <Center width='90%' border='solid'
           borderRadius='30px' borderColor={colors.mountainMeadow}
           borderWidth= {['4px', '4px', '6px', '6px']}>
-            <Image src={props.fishImage}
+            <Image src={props.fishImage} fallbackSrc={fishDefaultImg}
                 maxWidth={['75vw', '80vw', '80%', '80%']}
                 maxHeight={['50vw', '50vw', 'auto', '210px']}/>
           </Center>

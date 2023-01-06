@@ -90,7 +90,10 @@ const FishDetailPage = () => {
   const [isLoaded, setIsLoaded] = React.useState(false)
 
   useEffect(() => {
-    document.title = speciesName
+    let title = speciesName.replaceAll('-', ' ')
+    title = title.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase())
+    document.title = title
+
     fetch(`https://www.fishwatch.gov/api/species/${speciesName}`)
       .then((response) => response.json())
       .then((data) => {
