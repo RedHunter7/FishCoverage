@@ -17,7 +17,7 @@ const HomePage = () => {
   useEffect(() => {
     document.title = 'Fish Coverage'
     axios.get('https://www.fishwatch.gov/api/species')
-      .then((response) => {
+      .then(response => {
         fetchFishes(response.data)
         fetchSearchResult(response.data)
         setPage(0)

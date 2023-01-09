@@ -6,6 +6,7 @@ import {
 } from '../components/grid-items'
 import { useParams } from 'react-router-dom'
 import { Navbar } from '../components/layouts'
+import axios from 'axios'
 
 const htmlToArray = (html) => {
   if (html) {
@@ -94,9 +95,10 @@ const FishDetailPage = () => {
     title = title.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase())
     document.title = title
 
-    fetch(`https://www.fishwatch.gov/api/species/${speciesName}`)
-      .then((response) => response.json())
-      .then((data) => {
+    axios.get(`https://www.fishwatch.gov/api/species/${speciesName}`)
+      .then(response => {
+        const data = response.data
+
         const newFish = fishdefaultProp
         newFish['Species Name'] = data[0][['Species Name']]
         newFish['Scientific Name'] = data[0]['Scientific Name']
