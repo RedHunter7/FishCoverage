@@ -2,9 +2,7 @@
 
 Fish Catalog Website created for learning react library.
 
-[Website Link](https://fish-coverage.netlify.app/)
-
-[Figma Link](https://www.figma.com/file/yEmeMQkHh3jBfCH8mMlbVS/FishCov?node-id=0%3A1&t=LKnThzUkhf9sdcc9-1)
+[Website Link](https://fish-coverage.netlify.app/) | [Figma Link](https://www.figma.com/file/yEmeMQkHh3jBfCH8mMlbVS/FishCov?node-id=0%3A1&t=LKnThzUkhf9sdcc9-1)
 
 ## Preview 
 
